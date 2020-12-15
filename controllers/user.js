@@ -43,7 +43,23 @@ const login = async (req, res) => {
   }
 };
 
+const getUserData = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+
+    if (id) {
+      const userData = await db.User.findOne({ where: { id } });
+      return res.status(200).send(userData);
+    } else {
+      return res.status(404).send({ message: 'id not found!' });
+    }
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   register,
   login,
+  getUserData,
 };
