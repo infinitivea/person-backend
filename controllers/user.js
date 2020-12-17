@@ -21,7 +21,7 @@ const register = async (req, res, next) => {
         phone,
       });
     }
-    res.status(201).send({ message: 'User created.' });
+    res.status(201).send({ message: 'User has created.' });
   } catch (err) {
     next(err);
   }
@@ -43,7 +43,13 @@ const login = async (req, res) => {
   }
 };
 
+const getAllUser = async (req, res) => {
+  const allUser = await db.User.findAll();
+  res.status(200).send(allUser);
+};
+
 module.exports = {
   register,
   login,
+  getAllUser,
 };
