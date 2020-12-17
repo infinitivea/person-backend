@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const register = async (req, res, next) => {
   try {
     const { username, password } = req.body;
-    const targetAdmin = await db.User.findOne({ where: { username } });
+    const targetAdmin = await db.Admin.findOne({ where: { username } });
 
     if (targetAdmin) {
       res.status(400).send({ message: 'Username has already used.' });
