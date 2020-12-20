@@ -30,7 +30,7 @@ const login = async (req, res) => {
 
   if (targetAdmin) {
     if (bcrypt.compareSync(password, targetAdmin.password)) {
-      const token = jwt.sign({ id: targetAdmin.id }, process.env.SECRET, { expiresIn: 3600 });
+      const token = jwt.sign({ id: targetAdmin.id, role: 'ADMIN' }, process.env.SECRET, { expiresIn: 3600 });
       res.status(200).send({ token });
     } else {
       res.status(400).send({ message: 'Username or password is incorrect.' });

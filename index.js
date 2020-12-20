@@ -4,6 +4,7 @@ const express = require('express');
 const cors = require('cors');
 
 const userRoutes = require('./routes/user');
+const partnersRoutes = require('./routes/partner');
 const adminRoutes = require('./routes/admin');
 
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/users', userRoutes);
+app.use('/partners', partnersRoutes);
 app.use('/admins', adminRoutes);
 
 app.listen(process.env.PORT, () => {
