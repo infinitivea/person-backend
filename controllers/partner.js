@@ -1,10 +1,12 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
 
 const register = async (req, res, next) => {
   try {
-    const { email, password, name, phone } = req.body;
+    const { email, password, company_name, company_type, phone } = req.body;
     const targetPartnerByEmail = await db.Partner.findOne({ where: { email } });
     const targetPartnerByPhone = await db.Partner.findOne({ where: { phone } });
 
@@ -64,9 +66,42 @@ const getPartnerData = async (req, res, next) => {
   }
 };
 
+const updateInformation = async (req, res, next) => {
+  try {
+    const { id } = req.query;
+    const { company_name, company_type, closeDate, openTime, closeTime } = req.body;
+    const file = req.file;
+
+    cloudinary.uploader.upload(file.path, async (error, result) => {
+      console.log(result);
+      console.log('------------');
+      console.log(error);
+
+      const targetPartner = await db.Partner.findOne({ where: { id } });
+
+      if (targetPartner) {
+        targetPartner.company_name = company_name;
+        targetPartner.company_type = company_type;
+        targetPartner.image = result.secure_url;
+        targetPartner.closeDate = closeDate;
+        targetPartner.openTime = openTime;
+        targetPartner.closeTime = closeTime;
+
+        await targetPartner.save();
+
+        fs.unlinkSync(file.path);
+        res.status(201).json(targetPartner);
+      }
+    });
+  } catch (err) {
+    next(err);
+  }
+};
+
 module.exports = {
   register,
   login,
   getAllPartner,
   getPartnerData,
+  updateInformation,
 };

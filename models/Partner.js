@@ -19,6 +19,22 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.ENUM('Fitness', 'Auditorium', 'Meeting Room'),
         allowNull: false,
       },
+      image: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      closeDate: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      openTime: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
+      closeTime: {
+        type: DataTypes.STRING,
+        allowNull: true,
+      },
       phone: {
         type: DataTypes.STRING(10),
         allowNull: false,

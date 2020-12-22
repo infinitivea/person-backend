@@ -2,12 +2,8 @@ module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define(
     'Booking',
     {
-      start_date: {
-        type: DataTypes.DATE,
-        allowNull: false,
-      },
-      end_date: {
-        type: DataTypes.DATE,
+      reserve_date: {
+        type: DataTypes.DATEONLY,
         allowNull: false,
       },
       type: {
