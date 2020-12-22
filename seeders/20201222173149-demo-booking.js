@@ -9,6 +9,7 @@ module.exports = {
         email: 'pom_kab@gmail.com',
         phone: '0991112222',
         user_id: 1,
+        partner_id: 1,
       },
     ]);
   },

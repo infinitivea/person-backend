@@ -10,7 +10,7 @@ const register = async (req, res, next) => {
     const targetPartnerByEmail = await db.Partner.findOne({ where: { email } });
     const targetPartnerByPhone = await db.Partner.findOne({ where: { phone } });
 
-    if (targetPartnerByEmail || targetPartnerByPhone) {
+    if (targetPartnerByEmail && targetPartnerByPhone) {
       res.status(400).send({ message: 'Email or phone number has already used.' });
     } else {
       const salt = bcrypt.genSaltSync(Number(process.env.SALT_ROUND));
