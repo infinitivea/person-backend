@@ -40,6 +40,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         unique: true,
       },
+      status: {
+        type: DataTypes.ENUM('Availability', 'Reserved'),
+        defaultValue: 'Availability',
+      },
     },
     {
       tableName: 'partners',
