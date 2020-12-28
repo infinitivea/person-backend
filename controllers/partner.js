@@ -6,7 +6,7 @@ const cloudinary = require('cloudinary').v2;
 
 const register = async (req, res, next) => {
   try {
-    const { email, password, company_name, company_type, phone } = req.body;
+    const { email, password, company_name, company_type, phone, closeDate, openTime, closeTime } = req.body;
     const targetPartnerByEmail = await db.Partner.findOne({ where: { email } });
     const targetPartnerByPhone = await db.Partner.findOne({ where: { phone } });
 
@@ -22,6 +22,9 @@ const register = async (req, res, next) => {
         company_name,
         company_type,
         phone,
+        closeDate,
+        openTime,
+        closeTime,
       });
     }
     res.status(201).send({ message: 'Partner has created.' });

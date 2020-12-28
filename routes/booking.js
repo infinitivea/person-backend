@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const { createBooking } = require('../controllers/booking');
+const { createBooking, getBookingData, approveBooking } = require('../controllers/booking');
 
-router.post('/create', createBooking);
+router.post('/create/:id', createBooking);
+router.get('/', getBookingData);
+router.patch('/approve', approveBooking);
 
 module.exports = router;

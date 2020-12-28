@@ -2,6 +2,10 @@ module.exports = (sequelize, DataTypes) => {
   const Booking = sequelize.define(
     'Booking',
     {
+      company_name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       reserve_date: {
         type: DataTypes.DATEONLY,
         allowNull: false,
@@ -17,6 +21,10 @@ module.exports = (sequelize, DataTypes) => {
       phone: {
         type: DataTypes.STRING(10),
         allowNull: false,
+      },
+      status: {
+        type: DataTypes.ENUM('Pending', 'Approve'),
+        defaultValue: 'Pending',
       },
     },
     {

@@ -14,6 +14,10 @@ module.exports = {
         company_name: 'Fitness First',
         company_type: 'Fitness',
         phone: '0991112222',
+        closeDate: ['Sat'],
+        openTime: '07:00',
+        closeTime: '21:00',
+        status: 'Availability',
       },
     ]);
   },
