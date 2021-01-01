@@ -11,19 +11,21 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      name: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       phone: {
         type: DataTypes.STRING(10),
         allowNull: false,
         unique: true,
       },
+      image_url: {
+        type: DataTypes.STRING,
+      },
+      role: {
+        type: DataTypes.ENUM('ADMIN', 'PARTNER', 'USER'),
+      },
     },
     {
       tableName: 'users',
-      timestamps: false,
+      timestamps: true,
     }
   );
 

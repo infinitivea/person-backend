@@ -5,13 +5,11 @@ module.exports = {
     return queryInterface.bulkInsert('bookings', [
       {
         reserve_date: new Date(),
-        company_name: 'Fitness First',
-        type: 'Fitness',
-        email: 'pom_kab@gmail.com',
-        phone: '0991112222',
-        status: 'Pending',
+        status: 'pending',
         user_id: 1,
-        partner_id: 1,
+        room_id: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },

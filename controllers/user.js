@@ -1,14 +1,18 @@
 const db = require('../models');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { Op } = require('sequelize');
 
 const register = async (req, res, next) => {
   try {
-    const { email, password, name, phone } = req.body;
-    const targetUserByEmail = await db.User.findOne({ where: { email } });
-    const targetUserByPhone = await db.User.findOne({ where: { phone } });
+    const { email, password, phone, image_url, role } = req.body;
+    const targetUser = await db.User.findOne({
+      where: {
+        [Op.or]: [{ email }, { phone }],
+      },
+    });
 
-    if (targetUserByEmail && targetUserByPhone) {
+    if (targetUser) {
       res.status(400).send({ message: 'Email or phone number has already used.' });
     } else {
       const salt = bcrypt.genSaltSync(Number(process.env.SALT_ROUND));
@@ -17,8 +21,9 @@ const register = async (req, res, next) => {
       await db.User.create({
         email,
         password: hashedPassword,
-        name,
         phone,
+        image_url,
+        role,
       });
     }
     res.status(201).send({ message: 'User has created.' });
@@ -33,7 +38,7 @@ const login = async (req, res) => {
 
   if (targetUser) {
     if (bcrypt.compareSync(password, targetUser.password)) {
-      const token = jwt.sign({ id: targetUser.id, role: 'USER' }, process.env.SECRET, { expiresIn: 3600 });
+      const token = jwt.sign({ id: targetUser.id, role: targetUser.role }, process.env.SECRET, { expiresIn: 3600 });
       res.status(200).send({ token });
     } else {
       res.status(400).send({ message: 'Username or password is incorrect.' });

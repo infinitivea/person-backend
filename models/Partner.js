@@ -51,9 +51,5 @@ module.exports = (sequelize, DataTypes) => {
     }
   );
 
-  Partner.associate = (models) => {
-    Partner.hasMany(models.Booking, { foreignKey: 'partner_id' });
-  };
-
   return Partner;
 };

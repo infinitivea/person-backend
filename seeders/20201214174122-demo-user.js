@@ -12,8 +12,26 @@ module.exports = {
       {
         email: 'pom_kab@gmail.com',
         password: hashedPassword,
-        name: 'Au',
         phone: '0991112222',
+        role: 'USER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'first@gmail.com',
+        password: hashedPassword,
+        phone: '0901112222',
+        role: 'PARTNER',
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        email: 'admin@gmail.com',
+        password: hashedPassword,
+        phone: '0901234567',
+        role: 'ADMIN',
+        createdAt: new Date(),
+        updatedAt: new Date(),
       },
     ]);
   },
