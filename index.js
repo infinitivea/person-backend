@@ -1,4 +1,5 @@
 require('dotenv').config();
+require('./middleware/passport');
 
 const db = require('./models');
 const express = require('express');
@@ -6,7 +7,6 @@ const cors = require('cors');
 
 const userRoutes = require('./routes/user');
 const partnersRoutes = require('./routes/partner');
-const adminRoutes = require('./routes/admin');
 const bookingRoutes = require('./routes/booking');
 
 const app = express();
@@ -17,7 +17,6 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use('/users', userRoutes);
 app.use('/partners', partnersRoutes);
-app.use('/admins', adminRoutes);
 app.use('/bookings', bookingRoutes);
 
 app.listen(process.env.PORT, () => {
